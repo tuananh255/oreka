@@ -20,10 +20,6 @@ const columns = [
     dataIndex: 'ncc',
   },
   {
-    title: 'Số điện thoại',
-    dataIndex: 'mobile',
-  },
-  {
     title: 'tên nhân viên',
     dataIndex: 'name',
   },
@@ -53,7 +49,6 @@ const ListPackage = () => {
       key: i + 1,
       createdAt: moment(statePackage[i]?.createdAt).tz("Asia/Ho_Chi_Minh").format("YYYY-MM-DD HH:mm:ss"),
       ncc: statePackage[i]?.ncc,
-      mobile: statePackage[i]?.userId?.mobile,
       name: statePackage[i]?.userId?.name,
       quantity: statePackage[i]?.quantity,
       action: (

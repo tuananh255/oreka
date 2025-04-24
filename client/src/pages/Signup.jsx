@@ -39,7 +39,7 @@ export default function Signup() {
           resetForm();
           setTimeout(() => {
             navigate('/dang-nhap');
-          }, 2000);
+          }, 1000);
         } else {
           toast.error(res.data.message || "Đăng ký thất bại");
         }

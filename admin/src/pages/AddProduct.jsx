@@ -23,6 +23,7 @@ let schema = yup.object().shape({
   brand: yup.string().required("Brand is Required"),
   category: yup.string().required("Category is Required"),
   type: yup.string().required("Type is Required"),
+  location: yup.string().required("location is Required"),
 });
 
 const Addproduct = () => {
@@ -62,9 +63,9 @@ const Addproduct = () => {
       priceSale:"",
       brand:  "",
       category: "",
-      tags: "",
       images: "",
-      type:""
+      type:"",
+      location:""
     },
     validationSchema: schema,
     onSubmit: (values) => {
@@ -204,6 +205,34 @@ const Addproduct = () => {
           <div className="error">
             {formik.touched.type && formik.errors.type}
           </div>
+          <select
+            name="location"
+            onChange={formik.handleChange("location")}
+            onBlur={formik.handleBlur("location")}
+            value={formik.values.location}
+            className="form-control py-3 mb-3"
+          >
+            <option value="">Chọn tỉnh/thành phố</option>
+            {[
+              "Hà Nội", "Thành phố Hồ Chí Minh", "Đà Nẵng", "Hải Phòng", "Cần Thơ",
+              "An Giang", "Bà Rịa – Vũng Tàu", "Bắc Giang", "Bắc Kạn", "Bạc Liêu",
+              "Bắc Ninh", "Bến Tre", "Bình Định", "Bình Dương", "Bình Phước",
+              "Bình Thuận", "Cà Mau", "Cao Bằng", "Đắk Lắk", "Đắk Nông", "Điện Biên",
+              "Đồng Nai", "Đồng Tháp", "Gia Lai", "Hà Giang", "Hà Nam", "Hà Tĩnh",
+              "Hải Dương", "Hậu Giang", "Hòa Bình", "Hưng Yên", "Khánh Hòa",
+              "Kiên Giang", "Kon Tum", "Lai Châu", "Lâm Đồng", "Lạng Sơn", "Lào Cai",
+              "Long An", "Nam Định", "Nghệ An", "Ninh Bình", "Ninh Thuận", "Phú Thọ",
+              "Phú Yên", "Quảng Bình", "Quảng Nam", "Quảng Ngãi", "Quảng Ninh",
+              "Quảng Trị", "Sóc Trăng", "Sơn La", "Tây Ninh", "Thái Bình",
+              "Thái Nguyên", "Thanh Hóa", "Thừa Thiên Huế", "Tiền Giang", "Trà Vinh",
+              "Tuyên Quang", "Vĩnh Long", "Vĩnh Phúc", "Yên Bái"
+            ].map((city, index) => (
+              <option key={index} value={city}>
+                {city}
+              </option>
+            ))}
+          </select>
+
           <div className="bg-white border-1 p-5 text-center">
             <Dropzone
               onDrop={(acceptedFiles) => dispatch(uploadImg(acceptedFiles))}

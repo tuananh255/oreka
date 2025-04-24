@@ -3,7 +3,7 @@ const bodyParser = require("body-parser");
 const app = express();
 const PORT = 5000;
 const crypto = require("crypto");
-
+const supplierRoute = require("./routes/supplierRoute");
 const authRoute = require("./routes/authRoute");
 const slideRoute = require("./routes/slideRoute");
 const brandRoute = require("./routes/brandRoute");
@@ -33,6 +33,7 @@ app.use("/api/auth", authRoute);
 app.use("/api/brand", brandRoute);
 app.use("/api/slide", slideRoute);
 app.use("/api/category", categoryRoute);
+app.use("/api/supplier", supplierRoute);
 app.use(
   "/api/package",
   packageProductRoute

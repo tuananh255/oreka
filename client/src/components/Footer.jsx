@@ -25,7 +25,7 @@ export default function Footer() {
           </div>
           <div className="w-[30%] px-4">
             <h5 className='mb-3'>Phương thức thang toán</h5>
-            <div class="flex gap-6">
+            <div className="flex gap-6">
               <img loading="lazy" src="https://static.oreka.vn/d/_next/static/images/visa-58401bb56c50049a3e4b928c8d562fd2.svg" alt="visa"/>
               <img loading="lazy" src="https://static.oreka.vn/d/_next/static/images/vnpay-0f841d0b4c8157965bf02ffb2f56c17a.svg" alt="vnpay"/>
               <img loading="lazy" src="https://static.oreka.vn/d/_next/static/images/momo-545c294f2ea7209254359efdfcbb4933.svg" alt="momo"/>

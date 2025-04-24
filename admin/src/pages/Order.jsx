@@ -71,7 +71,7 @@ export default function Order() {
         <div>
           <p>Tên : {orderState[i]?.shippingInfo?.name}</p>
           <p>Email : {orderState[i]?.shippingInfo?.email}</p>
-          <p>Số điện thoại : {orderState[i]?.user?.mobile}</p>
+          <p>Số điện thoại : {orderState[i]?.shippingInfo?.mobile}</p>
           <p>Địa chỉ : {orderState[i]?.shippingInfo?.address}</p>
         </div>
       ),

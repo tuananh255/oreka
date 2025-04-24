@@ -84,3 +84,29 @@ a{
   color: #eb6e34;
   text-decoration-line: underline;
 }
+.button{
+  width: 40px;
+  padding: 6px 12px;
+  border: 1px solid #a2a0a0;
+  font-weight: 600;
+  background-color: #fff;
+  color: black;
+  gap: 10;
+  border-radius: 12px;
+}
+.button-rq
+{
+  width: 50%;
+  background-color: rgb(36, 116, 236);
+  color: white;
+  border-radius: 10px;
+  padding: 6px 20px;
+  border: rgb(36, 116, 236);
+}
+.button-res {
+  background-color: #C92127;
+  color: white;
+  border: 1px solid #ccc;
+  outline: none;
+  padding: 6px 20px;
+}

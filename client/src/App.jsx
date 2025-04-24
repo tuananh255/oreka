@@ -6,6 +6,11 @@ import Login from './pages/Login'
 import Seller from './pages/Seller'
 import CategoryProduct from './pages/CategoryProduct'
 import ProductDetail from './pages/ProductDetail'
+import MyOrder from './pages/MyOrder'
+import { PrivateRoutes } from './routing/PrivateRoutes'
+import Cart from './pages/Cart'
+import Checkout from './pages/Checkout'
+import CheckoutSuccess from './pages/CheckoutSuccess'
 
 function App() {
 
@@ -19,7 +24,11 @@ function App() {
               <Route path='/dang-nhap' element={<Login />} />
               <Route path='/dang-ban' element={<Seller />} />
               <Route path='/:slug' element={<CategoryProduct />} />
-              <Route path='/oreka/:slug' element={<ProductDetail />} />
+              <Route path='/oreka/:id' element={<ProductDetail />} />
+              <Route path='/cart' element={<Cart />} />
+              <Route path='/my-order' element={<PrivateRoutes><MyOrder/></PrivateRoutes>}/>
+              <Route path='/checkout' element={<PrivateRoutes><Checkout/></PrivateRoutes>}/>
+              <Route path='checkout-success' element={<PrivateRoutes><CheckoutSuccess/></PrivateRoutes>}/>
             </Route>
           </Routes>
       </div>

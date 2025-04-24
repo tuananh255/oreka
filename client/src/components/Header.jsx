@@ -9,11 +9,13 @@ import { MdBorderAll } from "react-icons/md";
 import { useSelector } from 'react-redux';
 import { toast } from 'react-hot-toast';
 import { FaRegUserCircle } from "react-icons/fa";
+import { HiShoppingCart } from "react-icons/hi";
 
 export default function Header() {
   const userState = useSelector(
     (state) => state.auth.user
   );
+  const cartUser = useSelector(state=>state.auth.cartUser)
   console.log(userState)
   return (
     <div className='relative'>
@@ -41,47 +43,55 @@ export default function Header() {
               </div>
             </div>
             {userState !== null ? (
-                    <div
-                      className="dropdown flex"
-                      >
-                      <button
-                        className="dropdown-toggle d-flex align-items-center"
-                        type="button"
-                        style={{
-                          border: "none",
-                        }}
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false relative">
-                        <div className="text-center hover:text-main">
-                          <FaRegUserCircle className='text-[24px] flex justify-center'/>
-                          <p className='text-[12px]'>{userState?.name}</p>
-                          {/* hiển thị thông báo */}
-                          
-                        </div>
-                      </button>
-                      <ul className="dropdown-menu">
-                        <li>
-                          <Link
-                            className="dropdown-item cursor-pointer"
-                            to="/my-order">
-                            Đơn hàng của tôi
-                          </Link>
-                        </li>
-                        <li>
-                          <a
-                            className="dropdown-item cursor-pointer"
-                            onClick={() => {
-                              sessionStorage.clear();
-                              localStorage.clear();
-                              toast.success("Đăng xuất thành công")
-                              window.location.reload();
-                              navigate("/");
-                            }}>
-                            Đăng xuất
-                          </a>
-                        </li>
-                      </ul>
+              <>
+                <div
+                  className="dropdown flex gap-3"
+                  >
+                <div className="rounded-[50%] bottom-1 p-3 me-3 border cursor-pointer relative">
+                  <Link to='/cart'>
+                    <HiShoppingCart className='text-[18px] hover:text-red'/>
+                    <p className="absolute top-0 right-0  px-[8px] rounded-[50%]">{cartUser ? cartUser?.length : 0  ` `}</p>
+                  </Link>
+                </div>
+                  <button
+                    className="dropdown-toggle d-flex align-items-center"
+                    type="button"
+                    style={{
+                      border: "none",
+                    }}
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false relative">
+                    <div className="text-center hover:text-main">
+                      <FaRegUserCircle className='text-[24px] flex justify-center'/>
+                      <p className='text-[12px]'>{userState?.name}</p>
+                      {/* hiển thị thông báo */}
+                      
                     </div>
+                  </button>
+                  <ul className="dropdown-menu">
+                    <li>
+                      <Link
+                        className="dropdown-item cursor-pointer"
+                        to="/my-order">
+                        Đơn hàng của tôi
+                      </Link>
+                    </li>
+                    <li>
+                      <a
+                        className="dropdown-item cursor-pointer"
+                        onClick={() => {
+                          sessionStorage.clear();
+                          localStorage.clear();
+                          toast.success("Đăng xuất thành công")
+                          window.location.reload();
+                          navigate("/");
+                        }}>
+                        Đăng xuất
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </>
                   ) : (
                     <>
                       <div className="action">
@@ -103,9 +113,9 @@ export default function Header() {
                   Tất cả danh mục
                 </Link>
                 </div>
-                <div class="w-px h-6 bg-[#ddd]"></div>
+                <div className="w-px h-6 bg-[#ddd]"></div>
               <div className="text-[16px] hover:cursor-pointer">
-                <Link to='/' className='p-2 d-block'>
+                <Link to='/tat-ca?category=Sách' className='p-2 d-block'>
                   Sách
                 </Link>
                 </div>

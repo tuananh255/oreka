@@ -5,10 +5,18 @@ import Product from '../components/Product'
 import { Link } from 'react-router-dom'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation,Autoplay } from 'swiper/modules';
+import { useDispatch, useSelector } from 'react-redux'
+import { getCart } from '../features/users/userSlice'
+import { getAllProduct } from '../features/products/productSlice';
 export default function Homepage() {
+  const dispatch = useDispatch()
+
   useEffect(()=>{
-          window.scroll(0,0)
-      },[])
+    window.scroll(0,0)
+    dispatch(getCart())
+    dispatch(getAllProduct())
+  },[])
+  const allProduct =useSelector((state) => state.product?.products) || [];
   return (
     <div className='min-h-[500px] bg-[#F7F7F7]'>
       <SliderHome/>
@@ -31,32 +39,11 @@ export default function Homepage() {
               modules={[Navigation,Autoplay]}
               className="mySwiper"
               >
-              {/* {Array.isArray(slideState) && slideState.map((e, index) => ( */}
-              <SwiperSlide>
-                  <Product/>
+              {Array.isArray(allProduct) && allProduct.map((e, index) => (
+              <SwiperSlide key={index}>
+                  <Product product={e}/>
               </SwiperSlide>
-              <SwiperSlide>
-                  <Product/>
-              </SwiperSlide>
-              <SwiperSlide>
-                  <Product/>
-              </SwiperSlide>
-              <SwiperSlide>
-                  <Product/>
-              </SwiperSlide>
-              <SwiperSlide>
-                  <Product/>
-              </SwiperSlide>
-              <SwiperSlide>
-                  <Product/>
-              </SwiperSlide>
-              <SwiperSlide>
-                  <Product/>
-              </SwiperSlide>
-              <SwiperSlide>
-                  <Product/>
-              </SwiperSlide>
-              {/* ))} */}
+              ))}
           </Swiper>
         </div>
       </div>
