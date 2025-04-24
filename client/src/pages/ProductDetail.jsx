@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { getAllProduct,getAProduct, ratingProduct } from '../features/products/productSlice';
 import ProductDescription from '../components/ProductDescription';
 import ReactStars from "react-rating-stars-component";
@@ -11,6 +11,7 @@ import {
   getCart,
 } from "../features/users/userSlice";
 import toast from 'react-hot-toast';
+import Product from '../components/Product';
 export default function ProductDetail() {
     const dispatch = useDispatch();
 
@@ -24,6 +25,7 @@ export default function ProductDetail() {
   const [packageQuantity,setPackageQuantity,] = useState(0);
   const [mainImageIndex,setMainImageIndex,] = useState(0);
   const [brandProduct, setBrandProduct,] = useState([]);
+
   useEffect(()=>{
     window.scroll(0,0)
     dispatch(getAProduct(id))
@@ -41,7 +43,24 @@ export default function ProductDetail() {
   const packageProduct = useSelector((state) =>state.package.packages?.newPackageProduct);
   const allProduct =useSelector((state) => state.product?.products) || [];
   const user = useSelector((state) => state.auth?.user);
-
+  useEffect(() => {
+    if (
+      aProduct &&
+      allProduct.length > 0
+    ) {
+      const filteredProducts =
+        allProduct
+          .filter(
+            (product) =>
+              product.category ===
+                aProduct.category &&
+              product._id !==
+                aProduct._id
+          )
+          .slice(0, 4);
+      setBrandProduct(filteredProducts);
+    }
+  }, [aProduct, allProduct]);
   useEffect(() => {
     setPackageQuantity(0);
     if (
@@ -376,7 +395,7 @@ export default function ProductDetail() {
                             fontWeight:
                               "600",
                           }}
-                          to="/login">
+                          to="/dang-nhap">
                           Đăng nhập để
                           đăng ký
                         </Link>
@@ -418,17 +437,16 @@ export default function ProductDetail() {
               <h3 className="py-4">
                 SẢN PHẨM CÙNG DANH MỤC
               </h3>
-              <div className="d-flex flex-wrap row">
-                {/* {brandProduct &&
+              <div className="d-flex flex-wrap gap-3">
+                {brandProduct &&
                   brandProduct.map(
                     (product, index) => (
                       <Product
+                        product={product}
                         key={index}
-                        item={product}
-                      //   col={3}
                       />
                     )
-                  )} */}
+                  )}
               </div>
             </div>
           </div>

@@ -11,15 +11,13 @@ import {
   getCart,
 } from "../features/users/userSlice";
 import axios from "axios";
+import { base_url } from "../utils/base_url";
+import { config } from "../utils/axiosconfig";
+import Paypal from "../components/Paypal";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-// import Breadcrumd from "../components/Breadcrumd";
-import { base_url } from "../utils/base_url";
-import { config } from "../utils/axiosconfig";
-import Paypal from "../components/Paypal";
-// import Helmetz from "../components/Helmetz";
 
 const userSchema = Yup.object().shape({
   name: Yup.string().required(
@@ -60,7 +58,25 @@ const Checkout = () => {
   const cartState = useSelector(
     (state) => state.auth?.cartUser
   );
-
+  
+  useEffect(() => {
+    if (
+      aProduct &&
+      allProduct.length > 0
+    ) {
+      const filteredProducts =
+        allProduct
+          .filter(
+            (product) =>
+              product.category ===
+                aProduct.category &&
+              product._id !==
+                aProduct._id
+          )
+          .slice(0, 4);
+      setBrandProduct(filteredProducts);
+    }
+  }, [aProduct, allProduct]);
   useEffect(() => {
     dispatch(getCart());
     window.scroll(0, 0);
@@ -151,7 +167,7 @@ const Checkout = () => {
                     className="d-flex justify-content-between align-items-center mb-3">
                     <div className="d-flex align-items-center">
                       <img
-                        className="me-3 img-fluid me-2"
+                        className="me-3 img-fluid"
                         width={50}
                         height={50}
                         src={
