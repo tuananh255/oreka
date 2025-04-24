@@ -1,15 +1,8 @@
 import React from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation,Autoplay } from 'swiper/modules';
-const slideState =[
-    {
-        img :"https://static.oreka.vn/fd85db97-5f7d-4dbe-acdb-d2ea81cbee13"
-    },
-    {
-        img:"https://static.oreka.vn/65b4f05d-0109-49c1-917d-6816652f045a"
-    }
-]
-function SliderHome() {
+
+function SliderHome({slideState}) {
   return (
     <section className='py-4'>
       <div className="container">
@@ -29,7 +22,7 @@ function SliderHome() {
                 >
                 {Array.isArray(slideState) && slideState.map((e, index) => (
                 <SwiperSlide key={index}>
-                    <img width="100%" className='h-[250px] rounded' src={e?.img} alt="" />
+                    <img width="100%" className='h-[250px] rounded' src={e?.images[0]?.url} alt="" />
                 </SwiperSlide>
                 ))}
             </Swiper>

@@ -96,30 +96,30 @@ const MainLayout = () => {
               label:
                 "Quản lý người dùng",
             },
-            {
-              key: "blog",
-              icon: (
-                <CiUser className="fs-4" />
-              ),
-              label: "Blog",
-              children: [
-                {
-                  key: "list-categoryblog",
-                  icon: (
-                    <CiShoppingCart className="fs-4" />
-                  ),
-                  label:
-                    "Danh mục blog",
-                },
-                {
-                  key: "list-blogs",
-                  icon: (
-                    <SiBrandfolder className="fs-4" />
-                  ),
-                  label: "Quản lý blog",
-                },
-              ],
-            },
+            // {
+            //   key: "blog",
+            //   icon: (
+            //     <CiUser className="fs-4" />
+            //   ),
+            //   label: "Blog",
+            //   children: [
+            //     {
+            //       key: "list-categoryblog",
+            //       icon: (
+            //         <CiShoppingCart className="fs-4" />
+            //       ),
+            //       label:
+            //         "Danh mục blog",
+            //     },
+            //     {
+            //       key: "list-blogs",
+            //       icon: (
+            //         <SiBrandfolder className="fs-4" />
+            //       ),
+            //       label: "Quản lý blog",
+            //     },
+            //   ],
+            // },
             {
               key: "catalog",
               icon: (
@@ -230,7 +230,7 @@ const MainLayout = () => {
                     objectFit: "cover",
                     borderRadius: "50%",
                   }}
-                  src="https://uploads-ssl.webflow.com/5fb85f26f126ce08d792d2d9/6362dd5e926122938ff89ade_Apple_Rainbow_Logo_Color_Scheme.jpg"
+                  src="https://static.oreka.vn/wp-content/uploads/2023/11/30035130/Logo-2.png"
                   alt=""
                 />
               </div>

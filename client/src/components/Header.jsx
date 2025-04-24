@@ -91,6 +91,9 @@ export default function Header() {
                     </li>
                   </ul>
                 </div>
+                <button className='btn btn-ban hover:cursor-pointer'>
+                  <Link to="/dang-ban">Đăng bán</Link>
+                </button>
               </>
                   ) : (
                     <>

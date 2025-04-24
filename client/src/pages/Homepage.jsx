@@ -8,18 +8,22 @@ import { Navigation,Autoplay } from 'swiper/modules';
 import { useDispatch, useSelector } from 'react-redux'
 import { getCart } from '../features/users/userSlice'
 import { getAllProduct } from '../features/products/productSlice';
+import { getAllSlide } from '../features/slide/slideSlice';
+
 export default function Homepage() {
   const dispatch = useDispatch()
+  const slideState = useSelector(state=>state.slide?.slides)
 
   useEffect(()=>{
     window.scroll(0,0)
     dispatch(getCart())
+    dispatch(getAllSlide())
     dispatch(getAllProduct())
   },[])
   const allProduct =useSelector((state) => state.product?.products) || [];
   return (
     <div className='min-h-[500px] bg-[#F7F7F7]'>
-      <SliderHome/>
+      <SliderHome slideState={slideState}/>
       <CategoryHome/>
       <div className="container bg-white mt-5">
         <div className="flex justify-between">
