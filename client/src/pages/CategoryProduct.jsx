@@ -20,9 +20,7 @@ export default function CategoryProduct() {
   const defaultCategory = queryParams.get('category') || '';
 
   const [filter, setFilter] = useState({ priceRange: '', name: '' });
-  const [selectedCategories, setSelectedCategories] = useState(
-    defaultCategory ? [defaultCategory] : []
-  );
+  const [selectedCategories, setSelectedCategories] = useState([]);
 
   useEffect(() => {
     dispatch(getAllProduct());
@@ -30,16 +28,25 @@ export default function CategoryProduct() {
     window.scroll(0, 0);
   }, [dispatch]);
 
+  useEffect(() => {
+    const normalizedDefault = defaultCategory ? normalizeString(defaultCategory) : '';
+    if (normalizedDefault) {
+      setSelectedCategories([normalizedDefault]);
+    }
+  }, [defaultCategory]);
+
   const products = useSelector(state => state.product?.products);
-  const categorys = useSelector(state => state.category?.category);
+  const categories = useSelector(state => state.category?.category);
 
   const normalizeString = (str) => {
     return str.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
   };
 
   const handleCategorySelect = (category) => {
-    setSelectedCategories(prev =>
-      prev.includes(category) ? prev.filter(c => c !== category) : [...prev, category]
+    setSelectedCategories((prev) =>
+      prev.includes(category)
+        ? prev.filter((c) => c !== category)
+        : [...prev, category]
     );
   };
 
@@ -55,7 +62,7 @@ export default function CategoryProduct() {
 
         let matchesPrice = true;
         if (filter.priceRange) {
-          const [minPrice, maxPrice] = filter.priceRange.split('-').map(p => parseFloat(p));
+          const [minPrice, maxPrice] = filter.priceRange.split('-').map((p) => parseFloat(p));
           matchesPrice = product.priceSale >= minPrice && (isNaN(maxPrice) || product.priceSale <= maxPrice);
         }
 
@@ -72,14 +79,14 @@ export default function CategoryProduct() {
   const filteredProducts = filterProducts(products);
 
   return (
-    <section className='bg-[#f3f3f3] py-5'>
+    <section className="bg-[#f3f3f3] py-5">
       <div className="container">
         <div className="flex">
           <div className="w-[20%]">
             <div>
               <div>
                 <h6 className="mb-2 pt-3 font-bold">Giá tiền</h6>
-                {priceRanges.map(range => (
+                {priceRanges.map((range) => (
                   <div key={range.value} className="form-check">
                     <input
                       className="form-check-input"
@@ -87,7 +94,7 @@ export default function CategoryProduct() {
                       name="priceRange"
                       value={range.value}
                       checked={filter.priceRange === range.value}
-                      onChange={() => setFilter(prev => ({ ...prev, priceRange: range.value }))}
+                      onChange={() => setFilter((prev) => ({ ...prev, priceRange: range.value }))}
                     />
                     <label className="form-check-label">{range.label}</label>
                   </div>
@@ -106,22 +113,23 @@ export default function CategoryProduct() {
                   />
                   <label className="form-check-label">Tất cả</label>
                 </div>
-                {Array.isArray(categorys) && categorys.map((category) => {
-                  const normalizedTitle = normalizeString(category.title);
-                  return (
-                    <div key={category._id} className="form-check">
-                      <input
-                        className="form-check-input"
-                        type="checkbox"
-                        name="category"
-                        value={normalizedTitle}
-                        checked={selectedCategories.includes(normalizedTitle)}
-                        onChange={() => handleCategorySelect(normalizedTitle)}
-                      />
-                      <label className="form-check-label">{category.title}</label>
-                    </div>
-                  );
-                })}
+                {Array.isArray(categories) &&
+                  categories.map((category) => {
+                    const normalizedTitle = normalizeString(category.title);
+                    return (
+                      <div key={category._id} className="form-check">
+                        <input
+                          className="form-check-input"
+                          type="checkbox"
+                          name="category"
+                          value={normalizedTitle}
+                          checked={selectedCategories.includes(normalizedTitle)}
+                          onChange={() => handleCategorySelect(normalizedTitle)}
+                        />
+                        <label className="form-check-label">{category.title}</label>
+                      </div>
+                    );
+                  })}
               </div>
             </div>
           </div>
@@ -131,7 +139,7 @@ export default function CategoryProduct() {
               <select
                 name="sortOrder"
                 className="form-control"
-                style={{ width: "200px" }}
+                style={{ width: '200px' }}
                 value={sortOrder}
                 onChange={(e) => setSortOrder(e.target.value)}
               >
@@ -142,9 +150,7 @@ export default function CategoryProduct() {
             </div>
             <div className="flex flex-wrap justify-items-start gap-3 mt-4">
               {Array.isArray(filteredProducts) && filteredProducts.length > 0 ? (
-                filteredProducts.map(product => (
-                  <Product key={product._id} product={product} />
-                ))
+                filteredProducts.map((product) => <Product key={product._id} product={product} />)
               ) : (
                 <p>Không có sản phẩm nào phù hợp.</p>
               )}

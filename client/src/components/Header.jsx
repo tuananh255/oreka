@@ -115,47 +115,47 @@ export default function Header() {
                 </div>
                 <div className="w-px h-6 bg-[#ddd]"></div>
               <div className="text-[16px] hover:cursor-pointer">
-                <Link to='/tat-ca?category=Sách' className='p-2 d-block'>
+                <Link to={`/tat-ca?category=sach`} className='p-2 d-block'>
                   Sách
                 </Link>
                 </div>
               <div className="text-[16px] hover:cursor-pointer">
-                <Link to='/' className='p-2 d-block'>
+                <Link to={`/tat-ca?category=${encodeURIComponent('Đồ cho nam')}`} className='p-2 d-block'>
                   Đồ cho nam
                 </Link>
                 </div>
               <div className="text-[16px] hover:cursor-pointer">
-                <Link to='/' className='p-2 d-block'>
+                <Link to={`/tat-ca?category=${encodeURIComponent('Thời trang nữ')}`} className='p-2 d-block'>
                   Thời trang nữ
                 </Link>
                 </div>
               <div className="text-[16px] hover:cursor-pointer">
-                <Link to='/' className='p-2 d-block'>
+                <Link to={`/tat-ca?category=${encodeURIComponent('Đồ làm đẹp')}`} className='p-2 d-block'>
                   Đồ làm đẹp
                 </Link>
                 </div>
               <div className="text-[16px] hover:cursor-pointer">
-                <Link to='/' className='p-2 d-block'>
+                <Link to={`/tat-ca?category=${encodeURIComponent('Đồ cho mẹ và bé')}`} className='p-2 d-block'>
                   Đồ cho mẹ và bé
                 </Link>
                 </div>
               <div className="text-[16px] hover:cursor-pointer">
-                <Link to='/' className='p-2 d-block'>
+                <Link to={`/tat-ca?category=${encodeURIComponent('Đồ chơi và trò chơi')}`} className='p-2 d-block'>
                   Đồ chơi & trò chơi
                 </Link>
                 </div>
               <div className="text-[16px] hover:cursor-pointer">
-                <Link to='/' className='p-2 d-block'>
+                <Link to={`/tat-ca?category=${encodeURIComponent('Đồ dùng nhà cửa')}`} className='p-2 d-block'>
                   Đồ dùng nhà cửa
                 </Link>
                 </div>
               <div className="text-[16px] hover:cursor-pointer">
-                <Link to='/' className='p-2 d-block'>
+                <Link to={`/tat-ca?category=${encodeURIComponent('Thiết bị điện tử')}`} className='p-2 d-block'>
                   Thiết bị điện tử
                 </Link>
                 </div>
               <div className="text-[16px] hover:cursor-pointer">
-                <Link to='/' className='p-2 d-block'>
+                <Link to={`/tat-ca?category=${encodeURIComponent('Đồ văn phòng')}`} className='p-2 d-block'>
                   Đồ văn phòng
                 </Link>
                 </div>
