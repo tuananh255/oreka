@@ -25,14 +25,6 @@ export default function CheckUser() {
                 <strong className='d-block me-3'>Email: </strong>
                 <p>{useState?.email}</p>
             </div>
-            <div className="d-flex">
-                <strong className='d-block me-3'>Số điện thoại: </strong>
-                <p>{useState?.mobile}</p>
-            </div>
-            <div className="d-flex">
-                <strong className='d-block me-3'>Địa chỉ: </strong>
-                <p>{useState?.address}</p>
-            </div>
         </div>
         <div className="gap-10 btn btn-primary" style={{width:"100px"}}>
             <Link to='/admin/list-users' className='fs-6 text-decoration-none text-white d-flex align-items-center'>

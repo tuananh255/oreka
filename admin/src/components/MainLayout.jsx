@@ -50,39 +50,10 @@ const MainLayout = () => {
   const user = useSelector(
     (state) => state.auth?.user
   );
-  const [isVisible, setIsVisible] = useState(false);
-  const [notifications, setNotifications] = useState([]);
 
-  const fetchNotifications = async () => {
-    try {
-      const response = await fetch(`${base_url}auth/getallnoti`, {
-        method: "GET", // HTTP method
-        headers: {
-          "Content-Type": "application/json", // Header chỉ định loại dữ liệu
-        },
-      });
   
-      if (!response.ok) {
-        throw new Error("Failed to fetch notifications");
-      }
-      const data = await response.json();
-      setNotifications(data.noti); // Lưu thông báo vào state
-    } catch (error) {
-      console.error("Failed to fetch notifications", error);
-    }
-  };
   const [count,setCount] =useState(0)
-  useEffect(() => {
-    let unreadCount = 0;
-    fetchNotifications()
-    notifications.forEach(notification => {
-      if (notification.read == false) {
-        unreadCount++;
-      }
-    });
-    setCount(unreadCount);
-  }, []);
-  console.log("notifications",notifications)
+  
   return (
     <Layout>
       <Sider

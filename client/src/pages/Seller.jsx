@@ -1,11 +1,23 @@
 import React, { useEffect } from 'react'
 import { FaArrowRight } from "react-icons/fa6";
 import Dropzone from "react-dropzone";
-
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import {toast} from 'react-hot-toast'
 export default function Seller() {
-    useEffect(()=>{
-            window.scroll(0,0)
-        },[])
+    const userState = useSelector((state) => state.auth.user);
+    const navigate = useNavigate();
+  
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
+  
+    useEffect(() => {
+      if (!userState) {
+          toast.error("Yêu cầu đăng nhập")
+          navigate('/dang-nhap');
+      }
+    }, [userState, navigate]);
   return (
     <section className='bg-[#f3f3f3] py-5'>
       <div className="container">

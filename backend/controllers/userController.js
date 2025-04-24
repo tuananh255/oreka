@@ -565,16 +565,6 @@ const updateProductQuantityCart =
       });
     }
   });
-  const sendRestockRequestEmail = async (productName, quantity) => {
-    const mailOptions = {
-      from: process.env.SMTP_MAIL,
-      to: "tranquocthinh2002gl@gmail.com",
-      subject: "Yêu Cầu Cung Cấp Thêm Sản Phẩm",
-      text: `Cần cung cấp thêm sản phẩm: ${productName}. Số lượng hiện có dưới 20: ${quantity}.`,
-    };
-  
-    return transporter.sendMail(mailOptions);
-  };
 const createOrder = asyncHandle(
   async (req, res) => {
     const {
@@ -651,21 +641,6 @@ const createOrder = asyncHandle(
     }
   }
 );
-const getAllNoti = async(req,res)=>{
-  try {
-    const noti = await notificationModel.find()
-    res.json({
-      noti,
-    });
-  } catch (error) {
-    console.log(error);
-    res.status(500).send({
-      success: false,
-      message:
-        "get all noti error !",
-    });
-  }
-}
 const getMyOrder = asyncHandle(
   async (req, res) => {
     const { _id } = req.user;
@@ -827,5 +802,5 @@ module.exports = {
   getMyOrder,
   getAllOrder,
   emptyCart,
-  updateStatusOrder,getAllNoti
+  updateStatusOrder
 };

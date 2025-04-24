@@ -37,16 +37,11 @@ var productSchema = new mongoose.Schema({
     type:{
         type:String,
         required : true,
-        enum:["Xu hướng theo ngày","Sách HOT - giảm sốc",
-            "Bestseller ngoại văn","Happy Halloween","flashSale","Lịch"],
+        enum:["Mới","Như mới","Tốt","Trung bình","Kém"],
     },
     brand :{
         type : String,
         required : true
-    },
-    sold :{
-        type : Number,
-        default : 0,
     },
     countBy:{
         type : Number,
@@ -56,10 +51,6 @@ var productSchema = new mongoose.Schema({
         public_id:String,
         url:String
     }],
-    hidden:{ 
-        type : Boolean,
-        default : false,
-    },
     ratings: [
         {
             star: Number,

@@ -16,12 +16,6 @@ var userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    address: {
-      type: String,
-    },
-    mobile: {
-      type: String,
-    },
     role: {
       type: String,
       enum: ["user", "admin", "seller"],

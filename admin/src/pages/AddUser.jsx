@@ -11,8 +11,6 @@ let schema = yup.object().shape({
   name: yup.string().required("name is Required"),
   email: yup.string().email("Nhập sai email !").required("email is Required"),
   password: yup.string().required("password is Required"),
-  address: yup.string().required("address is Required"),
-  mobile: yup.string().required("mobile is Required"),
   role: yup.string().required("role is Required"),
 });
 
@@ -37,8 +35,6 @@ const AddUser = () => {
       name: AUser?.name || "",
       email: AUser?.email || "",
       password: AUser?.password || "",
-      address: AUser?.address || "",
-      mobile: AUser?.mobile || "",
       role: AUser?.role || "",
     },
     validationSchema: schema,
@@ -99,27 +95,7 @@ const AddUser = () => {
             {formik.touched.password && formik.errors.password}
           </div>
 
-          <CustomInput 
-            type="text" 
-            label="Nhập địa chỉ"
-            onchange={formik.handleChange("address")}
-            onBlur={formik.handleBlur("address")}
-            val={formik.values.address}
-          />
-          <div className="error">
-            {formik.touched.address && formik.errors.address}
-          </div>
-
-          <CustomInput 
-            type="text" 
-            label="Nhập số điện thoại"
-            onchange={formik.handleChange("mobile")}
-            onBlur={formik.handleBlur("mobile")}
-            val={formik.values.mobile}
-          />
-          <div className="error">
-            {formik.touched.mobile && formik.errors.mobile}
-          </div>
+    
 
           <select
             name="role"
@@ -131,6 +107,7 @@ const AddUser = () => {
             <option value="">Select Role</option>
             <option value="user">user</option>
             <option value="admin">admin</option>
+            <option value="seller">seller</option>
           </select>
           <div className="error">
             {formik.touched.role && formik.errors.role}

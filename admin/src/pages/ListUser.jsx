@@ -25,10 +25,6 @@ const columns = [
     sorter :(a,b)=>a.email.length - b.email.length
   },
   {
-    title: 'Mobile',
-    dataIndex: 'mobile'
-  },
-  {
     title: 'Role',
     dataIndex: 'role',
     sorter :(a,b)=>a.role.length - b.role.length

@@ -6,7 +6,15 @@ import { TbPointFilled } from "react-icons/tb";
 import { CiSearch } from "react-icons/ci";
 import {Link} from "react-router-dom"
 import { MdBorderAll } from "react-icons/md";
+import { useSelector } from 'react-redux';
+import { toast } from 'react-hot-toast';
+import { FaRegUserCircle } from "react-icons/fa";
+
 export default function Header() {
+  const userState = useSelector(
+    (state) => state.auth.user
+  );
+  console.log(userState)
   return (
     <div className='relative'>
         <div className="bg-[#f5faf3]">
@@ -32,13 +40,59 @@ export default function Header() {
                 <CiSearch className='text-[24px] pe-1'/>
               </div>
             </div>
-            <div className="action">
-              <Link className='p-4 hover:cursor-pointer' to='/dang-ky'>Đăng ký</Link>
-              <Link className='p-4 hover:cursor-pointer' to='/dang-nhap'>Đăng nhập</Link>
-              <button className='btn btn-ban hover:cursor-pointer'>
-                <Link to="/dang-ban">Đăng bán</Link>
-              </button>
-            </div>
+            {userState !== null ? (
+                    <div
+                      className="dropdown flex"
+                      >
+                      <button
+                        className="dropdown-toggle d-flex align-items-center"
+                        type="button"
+                        style={{
+                          border: "none",
+                        }}
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false relative">
+                        <div className="text-center hover:text-main">
+                          <FaRegUserCircle className='text-[24px] flex justify-center'/>
+                          <p className='text-[12px]'>{userState?.name}</p>
+                          {/* hiển thị thông báo */}
+                          
+                        </div>
+                      </button>
+                      <ul className="dropdown-menu">
+                        <li>
+                          <Link
+                            className="dropdown-item cursor-pointer"
+                            to="/my-order">
+                            Đơn hàng của tôi
+                          </Link>
+                        </li>
+                        <li>
+                          <a
+                            className="dropdown-item cursor-pointer"
+                            onClick={() => {
+                              sessionStorage.clear();
+                              localStorage.clear();
+                              toast.success("Đăng xuất thành công")
+                              window.location.reload();
+                              navigate("/");
+                            }}>
+                            Đăng xuất
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  ) : (
+                    <>
+                      <div className="action">
+                        <Link className='p-4 hover:cursor-pointer' to='/dang-ky'>Đăng ký</Link>
+                        <Link className='p-4 hover:cursor-pointer' to='/dang-nhap'>Đăng nhập</Link>
+                        <button className='btn btn-ban hover:cursor-pointer'>
+                          <Link to="/dang-ban">Đăng bán</Link>
+                        </button>
+                      </div>
+                    </>
+                  )} 
           </div>
           <div className="container">
             <div className="flex items-center gap-2 justify-between">

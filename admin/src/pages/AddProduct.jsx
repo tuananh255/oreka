@@ -22,7 +22,6 @@ let schema = yup.object().shape({
   priceSale: yup.number().required("PriceSale is Required"),
   brand: yup.string().required("Brand is Required"),
   category: yup.string().required("Category is Required"),
-  tags: yup.string().required("Tag is Required"),
   type: yup.string().required("Type is Required"),
 });
 
@@ -184,23 +183,7 @@ const Addproduct = () => {
           <div className="error">
             {formik.touched.category && formik.errors.category}
           </div>
-          <select
-            name="tags"
-            onChange={formik.handleChange("tags")}
-            onBlur={formik.handleBlur("tags")}
-            value={formik.values.tags}
-            className="form-control py-3 mb-3"
-            id=""
-          >
-            <option value="" disabled>
-              Select hidden
-            </option>
-            <option value="false">Ẩn</option>
-            <option value="true">Hiện</option>
-          </select>
-          <div className="error">
-            {formik.touched.tags && formik.errors.tags}
-          </div>
+         
           <select
             name="type"
             onChange={formik.handleChange("type")}
@@ -210,14 +193,13 @@ const Addproduct = () => {
             id=""
           >
             <option value="" disabled>
-              Chọn loại
+              Chọn tình trạng
             </option>
-            <option value="Xu hướng theo ngày">Xu hướng theo ngày</option>
-            <option value="Sách HOT - giảm sốc">Sách HOT - giảm sốc</option>
-            <option value="Bestseller ngoại văn">Bestseller ngoại văn</option>
-            <option value="Happy Halloween">Happy Halloween</option>
-            <option value="flashSale">flashSale</option>
-            <option value="Lịch">Lịch</option>
+            <option value="Mới">Mới</option>
+            <option value="Như mới">Như mới</option>
+            <option value="Tốt">Tốt</option>
+            <option value="Trung bình">Trung bình</option>
+            <option value="Kém">Kém</option>
           </select>
           <div className="error">
             {formik.touched.type && formik.errors.type}

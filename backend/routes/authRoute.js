@@ -2,7 +2,8 @@ const express = require('express')
 const route = express.Router()
 
 const {authMiddleware,isAdmin} = require('../middlewares/authMiddleware.js')
-const { addUser, loginUser, loginAdmin, createOrder, userCart, updateProductQuantityCart, updateUser, updatePassword, getUserCart, getAllUsers, getsignUser, handleRefreshToken, getMyOrder, getAllOrder, logout, deletesignUser, emptyCart, removeProductCart, updateStatusOrder, sendEmail, getAllNoti, getUnreadNotifications, markNotificationsAsRead } = require('../controllers/userController.js')
+const { addUser, loginUser, loginAdmin, createOrder, userCart, updateProductQuantityCart, updateUser, updatePassword, getUserCart, getAllUsers, getsignUser, handleRefreshToken,
+     getMyOrder, getAllOrder, logout, deletesignUser, emptyCart, removeProductCart, updateStatusOrder, sendEmail, getUnreadNotifications, markNotificationsAsRead } = require('../controllers/userController.js')
 
 route.post('/sendemail/:email',sendEmail)
 route.post('/register',addUser)
@@ -20,7 +21,6 @@ route.put('/password',authMiddleware,updatePassword)
 route.put('/notifications/read/:userId', markNotificationsAsRead);
 
 
-route.get('/getallnoti',getAllNoti)
 
 
 route.get('/get-cart',authMiddleware,getUserCart)

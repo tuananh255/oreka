@@ -39,7 +39,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Login/>} />
           {/* bên trong mainlayout có outlet nhận các phần tử con làm children */}
-          <Route path='/admin' element={<><MainLayout/></>}>
+          <Route path='/admin' element={<PrivateRoutes><MainLayout/></PrivateRoutes>}>
             <Route index element={<HomePage/>} />
             <Route path='list-users' element={<ListUsers/>} />
             <Route path='thongbao' element={<Notification/>} />
