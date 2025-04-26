@@ -2,7 +2,8 @@ const express = require('express')
 const { createProduct, getaProduct, getAllProduct, updateProduct, 
     deleteProduct, rating, 
     getSlugProduct,
-    searchProductController} = 
+    searchProductController,
+    getMyProducts} = 
     require('../controllers/productController')
 const { isAdmin,authMiddleware} = require('../middlewares/authMiddleware')
 const { uploadPhoto, productImgResize,  } = require('../middlewares/uploadImg')
@@ -11,6 +12,8 @@ const route = express.Router()
 
 route.post('/add-product',authMiddleware,createProduct)
 route.post('/rating',authMiddleware,rating)
+route.get('/my-products', authMiddleware, getMyProducts);
+
 
 route.get('/get-product/:id',getaProduct)
 route.get('/search/:keyword',searchProductController)

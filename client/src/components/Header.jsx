@@ -77,6 +77,13 @@ export default function Header() {
                       </Link>
                     </li>
                     <li>
+                      <Link
+                        className="dropdown-item cursor-pointer"
+                        to="/my-products">
+                       Sản phâm của tôi
+                      </Link>
+                    </li>
+                    <li>
                       <a
                         className="dropdown-item cursor-pointer"
                         onClick={() => {

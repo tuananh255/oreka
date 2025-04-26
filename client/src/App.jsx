@@ -11,6 +11,7 @@ import { PrivateRoutes } from './routing/PrivateRoutes'
 import Cart from './pages/Cart'
 import Checkout from './pages/Checkout'
 import CheckoutSuccess from './pages/CheckoutSuccess'
+import MyProducts from './pages/MyProducts'
 
 function App() {
 
@@ -26,6 +27,7 @@ function App() {
               <Route path='/:slug' element={<CategoryProduct />} />
               <Route path='/oreka/:id' element={<ProductDetail />} />
               <Route path='/cart' element={<Cart />} />
+              <Route path='/my-products' element={<PrivateRoutes><MyProducts/></PrivateRoutes>}/>
               <Route path='/my-order' element={<PrivateRoutes><MyOrder/></PrivateRoutes>}/>
               <Route path='/checkout' element={<PrivateRoutes><Checkout/></PrivateRoutes>}/>
               <Route path='checkout-success' element={<PrivateRoutes><CheckoutSuccess/></PrivateRoutes>}/>

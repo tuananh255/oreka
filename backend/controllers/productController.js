@@ -98,7 +98,24 @@ const getaProduct = asyncHandle(async(req,res)=>{
         })
     }
 })
-
+const getMyProducts = asyncHandle(async (req, res) => {
+    try {
+      const products = await ProductModel.find({ postedBy: req.user._id }).sort({ createdAt: -1 });
+  
+      res.status(200).json({
+        success: true,
+        message: "Lấy sản phẩm của bạn thành công!",
+        products,
+      });
+    } catch (error) {
+      res.status(500).json({
+        success: false,
+        message: "Lỗi khi lấy sản phẩm của bạn.",
+      });
+    }
+  });
+  
+  
 const getSlugProduct = asyncHandle(async(req,res)=>{
     const {slug}= req.params
     try {
@@ -256,6 +273,6 @@ const rating = asyncHandle(async (req, res) => {
 
 
 module.exports = {createProduct ,getaProduct,getAllProduct
-  ,updateProduct,deleteProduct,rating,getSlugProduct,searchProductController
+  ,updateProduct,deleteProduct,rating,getSlugProduct,searchProductController,getMyProducts
   }
 
