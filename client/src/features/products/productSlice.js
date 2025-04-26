@@ -17,7 +17,13 @@ export const getAProduct = createAsyncThunk("products/get-product",async(id,thun
         return thunkApi.rejectWithValue(error)
     }
 })
-
+export const createProducts = createAsyncThunk('product/create-product',async(product,thunkAPI)=>{
+    try {
+        return await productService.createProducts(product) 
+    } catch (error) {
+        return thunkAPI.rejectWithValue(error)
+    }
+})
 export const getSlugProduct = createAsyncThunk("products/get-slug-product",async(slug,thunkApi)=>{
     try{
         return await productService.getSlugProduct(slug)
@@ -44,6 +50,7 @@ export const searchInput = createAsyncThunk("products/get-search-product",async(
 export const resetState = createAction("Reset_all");
 
 const initialState = {
+    createdProduct:"",
     products :"",
     AProduct:"",
     slugProduct:"",
@@ -75,7 +82,21 @@ export const productSlice = createSlice({
             state.isSuccess = false;
             state.message = action.error
         })
-        
+         .addCase(createProducts.pending,(state)=>{
+                    state.isLoading = true
+                })
+                .addCase(createProducts.fulfilled,(state,action)=>{
+                    state.isLoading = false
+                    state.isError = false
+                    state.isSuccess = true
+                    state.createdProduct = action.payload
+                })
+                .addCase(createProducts.rejected,(state,action)=>{
+                    state.isLoading = false
+                    state.isError = true
+                    state.isSuccess = false
+                    state.message = action.error
+                })
         builder.addCase(getAProduct.pending,(state)=>{
             state.isLoading = true;
         })

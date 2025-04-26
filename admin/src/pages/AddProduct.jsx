@@ -1,15 +1,13 @@
 import { React, useEffect, useState } from "react";
 import CustomInput from "../components/CustomInput";
 import ReactQuill from "react-quill";
-import { useNavigate,useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "react-quill/dist/quill.snow.css";
-import { toast } from "react-toastify";
 import * as yup from "yup";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { getBrands } from "../feature/brand/brandSlice";
 import { getCategory } from "../feature/pcategory/pcategorySlice";
-import { Select } from "antd";
 import Dropzone from "react-dropzone";
 
 import { delImg, resetImages, uploadImg } from "../feature/upload/uploadSlice";
@@ -52,7 +50,9 @@ const Addproduct = () => {
   useEffect(() => {
     formik.values.images = img;
   }, [img])
-
+    const user = useSelector(
+      (state) => state.auth?.user
+    );
   const formik = useFormik({
     
     initialValues: {
@@ -65,7 +65,8 @@ const Addproduct = () => {
       category: "",
       images: "",
       type:"",
-      location:""
+      location:"",
+      postedBy:user?._id
     },
     validationSchema: schema,
     onSubmit: (values) => {

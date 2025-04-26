@@ -7,6 +7,10 @@ const getAllProduct=async()=>{
         return res.data
     }
 }
+const createProducts =async(product)=>{
+    const res = await axios.post(`${base_url}product/add-product`,product,config)
+    return res.data
+}
 
 const getAProduct=async(id)=>{
     const res = await axios.get(`${base_url}product/get-product/${id}`)
@@ -35,6 +39,6 @@ const search = async(keyword)=>{
     }
 }
 
-export const productService={
+export const productService={createProducts,
     getAllProduct,getAProduct,getSlugProduct,search,ratingProduct
 }

@@ -9,7 +9,7 @@ const { uploadPhoto, productImgResize,  } = require('../middlewares/uploadImg')
 const { saveAddress } = require('../controllers/userController')
 const route = express.Router()
 
-route.post('/add-product',authMiddleware,isAdmin,createProduct)
+route.post('/add-product',authMiddleware,createProduct)
 route.post('/rating',authMiddleware,rating)
 
 route.get('/get-product/:id',getaProduct)

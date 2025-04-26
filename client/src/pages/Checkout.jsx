@@ -59,24 +59,24 @@ const Checkout = () => {
     (state) => state.auth?.cartUser
   );
   
-  useEffect(() => {
-    if (
-      aProduct &&
-      allProduct.length > 0
-    ) {
-      const filteredProducts =
-        allProduct
-          .filter(
-            (product) =>
-              product.category ===
-                aProduct.category &&
-              product._id !==
-                aProduct._id
-          )
-          .slice(0, 4);
-      setBrandProduct(filteredProducts);
-    }
-  }, [aProduct, allProduct]);
+  // useEffect(() => {
+  //   if (
+  //     aProduct &&
+  //     allProduct.length > 0
+  //   ) {
+  //     const filteredProducts =
+  //       allProduct
+  //         .filter(
+  //           (product) =>
+  //             product.category ===
+  //               aProduct.category &&
+  //             product._id !==
+  //               aProduct._id
+  //         )
+  //         .slice(0, 4);
+  //     setBrandProduct(filteredProducts);
+  //   }
+  // }, [aProduct, allProduct]);
   useEffect(() => {
     dispatch(getCart());
     window.scroll(0, 0);

@@ -11,6 +11,17 @@ const createProduct = asyncHandle(async(req,res)=>{
         if(req.body.title){
             req.body.slug = slugify(req.body.title)
         }
+        const existingUser = await userModel.findById(req.body.postedBy);
+        if (!existingUser) {
+          return res.status(404).json({ success: false, message: "User not found" });
+        }
+    
+       
+        if (existingUser.role !== "admin") {
+          existingUser.role = "seller";
+          await existingUser.save();
+        }
+
         const newProduct = await ProductModel.create(req.body)
         res.status(200).send({
             success : true,
@@ -73,7 +84,7 @@ const deleteProduct = asyncHandle(async (req, res) => {
 const getaProduct = asyncHandle(async(req,res)=>{
     const {id}= req.params
     try {
-        const findProduct = await ProductModel.findById(id)
+        const findProduct = await ProductModel.findById(id).populate("postedBy")
         res.status(200).send({
             success : true,
             message : "get a product error !",

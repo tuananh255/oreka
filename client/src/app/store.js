@@ -8,13 +8,14 @@ import packageproductReducer from '../features/packageProduct/packageProductSlic
 import categoryReducer from '../features/Category/categorySlice';
 import contactReducer from '../features/contact/contactSlice';
 import uploadReducer from '../features/upload/uploadSlice';
-
+import brandReducer from '../features/brand/brandSlice'
 export const store = configureStore({
   reducer: {
     auth : authReducer,
     product : productReducer,
     slide:slideReducer,
-    blog:blogReducer,
+        brand:brandReducer,
+        blog:blogReducer,
     categoryBlog:categoryBlogReducer,
     package:packageproductReducer,
     category:categoryReducer,
