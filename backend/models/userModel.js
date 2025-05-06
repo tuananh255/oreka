@@ -43,7 +43,7 @@ userSchema.pre(
   async function (next) {
     //Gọi hàm next để tiếp tục quá trình lưu tài liệu vào cơ sở dữ liệu.
     if (!this.isModified("password")) {
-      next();
+      return next();
     }
     const salt =
       await bcrypt.genSaltSync(10); //chuỗi ngẫu nhiên được thêm vào mật khẩu có tính bảo mật cao hơn

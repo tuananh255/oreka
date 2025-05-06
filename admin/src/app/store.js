@@ -1,4 +1,4 @@
-import {configureStore} from '@reduxjs/toolkit'
+import {configureStore } from '@reduxjs/toolkit'
 import authReducer from '../feature/auth/authSlice'
 import brandReducer from '../feature/brand/brandSlice'
 import categoryReducer from '../feature/pcategory/pcategorySlice'
@@ -25,5 +25,9 @@ export const store = configureStore({
         supplier:supplierReducer,
         package:packageProductReducer,
         voucher:voucherReducer,
-    }
+    },
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware({
+          serializableCheck: false,
+        }),
 })

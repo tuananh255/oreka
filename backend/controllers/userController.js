@@ -144,70 +144,59 @@ const loginUser = asyncHandle(async (req, res) => {
 });
 
 // login admin
-const loginAdmin = asyncHandle(
-  async (req, res) => {
-    const { email, password } =
-      req.body;
-    const findAdmin =
-      await userModel.findOne({
-        email,
-      });
-    if (findAdmin.role !== "admin") {
-      return res.status(500).send({
-        success: false,
-        message: "not authorised", // nếu tìm thấy có tồn tại
-      });
-    }
-    if (
-      findAdmin &&
-      (await findAdmin.isPasswordMatched(
-        password
-      ))
-    ) {
-      const refreshToken =
-        await genarateRefreshToken(
-          findAdmin?._id
-        );
-      const updateUser =
-        await userModel.findByIdAndUpdate(
-          findAdmin?._id,
-          {
-            refreshToken: refreshToken,
-          },
-          {
-            new: true,
-          }
-        );
-      res.cookie(
-        "refreshToken",
-        refreshToken,
-        {
-          httpOnly: true,
-          maxAge: 72 * 60 * 60 * 1000,
-        }
-      );
-      res.status(201).send({
-        success: true,
-        message: "Login successfully",
-        _id: findAdmin?._id,
-        name: findAdmin?.name,
-        email: findAdmin?.email,
-        mobile: findAdmin?.mobile,
-        password: findAdmin?.password,
-        role: findAdmin?.role,
-        token: genarateToken(
-          findAdmin?._id
-        ), // hiển thị ra token
-      });
-    } else {
-      return res.status(500).send({
-        success: true,
-        message:
-          "please create new user, Invalid", // nếu tìm thấy có tồn tại
-      });
-    }
+const loginAdmin = asyncHandle(async (req, res) => {
+  const { email, password } = req.body;
+
+  const findAdmin = await userModel.findOne({ email });
+  if (!findAdmin) {
+    return res.status(401).send({
+      success: false,
+      message: "Email not found",
+    });
   }
-);
+
+  if (findAdmin.role !== "admin") {
+    return res.status(403).send({
+      success: false,
+      message: "Not authorised",
+    });
+  }
+
+  const isPasswordCorrect = await findAdmin.isPasswordMatched(password);
+  if (!isPasswordCorrect) {
+    return res.status(401).send({
+      success: false,
+      message: "Invalid email or password",
+    });
+  }
+
+  // Generate refresh token and update user
+  const refreshToken = await genarateRefreshToken(findAdmin._id);
+  await userModel.findByIdAndUpdate(
+    findAdmin._id,
+    { refreshToken },
+    { new: true }
+  );
+
+  // Set refresh token as HTTP-only cookie
+  res.cookie("refreshToken", refreshToken, {
+    httpOnly: true,
+    maxAge: 72 * 60 * 60 * 1000, // 3 days
+  });
+
+  // Send successful response
+  res.status(200).send({
+    success: true,
+    message: "Login successfully",
+    _id: findAdmin._id,
+    name: findAdmin.name,
+    email: findAdmin.email,
+    mobile: findAdmin.mobile,
+    role: findAdmin.role,
+    token: genarateToken(findAdmin._id),
+  });
+});
+
 
 // handle refresh token
 const handleRefreshToken = asyncHandle(
